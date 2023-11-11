@@ -6,6 +6,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/Button_reading.c \
+../Core/Src/display7seg.c \
 ../Core/Src/main.c \
 ../Core/Src/software_timer.c \
 ../Core/Src/stm32f1xx_hal_msp.c \
@@ -16,6 +17,7 @@ C_SRCS += \
 
 OBJS += \
 ./Core/Src/Button_reading.o \
+./Core/Src/display7seg.o \
 ./Core/Src/main.o \
 ./Core/Src/software_timer.o \
 ./Core/Src/stm32f1xx_hal_msp.o \
@@ -26,6 +28,7 @@ OBJS += \
 
 C_DEPS += \
 ./Core/Src/Button_reading.d \
+./Core/Src/display7seg.d \
 ./Core/Src/main.d \
 ./Core/Src/software_timer.d \
 ./Core/Src/stm32f1xx_hal_msp.d \

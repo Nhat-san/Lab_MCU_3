@@ -6,6 +6,7 @@
 #include "main.h"
 
 void initButton();
+void read_button();
 uint8_t is_button_pressed(uint8_t i);
 uint8_t is_button_long_pressed(uint8_t i);
 
