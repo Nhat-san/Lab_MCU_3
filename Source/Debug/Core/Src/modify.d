@@ -1,5 +1,6 @@
-Core/Src/readbutton.o: ../Core/Src/readbutton.c ../Core/Inc/readbutton.h \
- ../Core/Inc/main.h ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
+Core/Src/modify.o: ../Core/Src/modify.c ../Core/Inc/modify.h \
+ ../Core/Inc/software_timer.h ../Core/Inc/readbutton.h ../Core/Inc/main.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h \
@@ -23,7 +24,9 @@ Core/Src/readbutton.o: ../Core/Src/readbutton.c ../Core/Inc/readbutton.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
- ../Core/Inc/port.h
+ ../Core/Inc/port.h ../Core/Inc/7segs.h ../Core/Inc/TrafficLight.h
+../Core/Inc/modify.h:
+../Core/Inc/software_timer.h:
 ../Core/Inc/readbutton.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -51,3 +54,5 @@ Core/Src/readbutton.o: ../Core/Src/readbutton.c ../Core/Inc/readbutton.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Core/Inc/port.h:
+../Core/Inc/7segs.h:
+../Core/Inc/TrafficLight.h:

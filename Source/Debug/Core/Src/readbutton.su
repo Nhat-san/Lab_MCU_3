@@ -1,4 +1,4 @@
 ../Core/Src/readbutton.c:24:6:initButton	16	static
 ../Core/Src/readbutton.c:36:6:read_button	24	static
-../Core/Src/readbutton.c:62:9:is_button_pressed	16	static
-../Core/Src/readbutton.c:67:9:is_button_long_pressed	16	static
+../Core/Src/readbutton.c:73:9:is_button_pressed	16	static
+../Core/Src/readbutton.c:78:9:is_button_long_pressed	16	static

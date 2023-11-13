@@ -8,7 +8,7 @@
 //num of button
 #define NUM_BUTTON 3
 //pressed button more than 1 sec
-#define LONG_PRESSED 100
+#define LONG_PRESSED 200
 //
 #define PRESSED 0
 //
@@ -38,7 +38,18 @@ void read_button() {
 		MyButton[i].debounce[3] = MyButton[i].debounce[2];
 		MyButton[i].debounce[2] = MyButton[i].debounce[1];
 		MyButton[i].debounce[1] = MyButton[i].debounce[0];
-		MyButton[i].debounce[0] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
+		if (i == 0) {
+			MyButton[i].debounce[0] = HAL_GPIO_ReadPin(BUTTON1_PORT,
+					BUTTON1_PIN);
+		}
+		else if (i == 1) {
+			MyButton[i].debounce[0] = HAL_GPIO_ReadPin(BUTTON2_PORT,
+					BUTTON2_PIN);
+		}
+		else if (i == 2) {
+			MyButton[i].debounce[0] = HAL_GPIO_ReadPin(BUTTON3_PORT,
+					BUTTON3_PIN);
+		}
 		if (MyButton[i].debounce[3] == MyButton[i].debounce[2]
 				&& MyButton[i].debounce[2] == MyButton[i].debounce[1]
 				&& MyButton[i].debounce[1] == MyButton[i].debounce[0]) {

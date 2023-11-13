@@ -6,9 +6,9 @@
  */
 #include "TrafficLight.h"
 
-enum st traffic_state = REDWE_GREENNS;
+enum st traffic_light_state = REDWE_GREENNS;
 void traffic_light(){
-	switch (traffic_state) {
+	switch (traffic_light_state) {
 		case REDWE_GREENNS:
 			HAL_GPIO_WritePin(TL_PORT, WE_AMBER, 1);
 			HAL_GPIO_WritePin(TL_PORT, WE_RED, 0);

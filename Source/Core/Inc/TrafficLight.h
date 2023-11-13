@@ -13,7 +13,7 @@
 
 extern enum st{
 	REDWE_GREENNS, REDWE_AMBERNS, GREENWE_REDNS, AMBERWE_REDNS, INVALID
-} traffic_state;
+} traffic_light_state;
 void traffic_light();
 
 #endif /* INC_TRAFFICLIGHT_H_ */

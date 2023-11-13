@@ -38,9 +38,9 @@
 #define SEG7_PORT 		GPIOB
 #define SEG_A 			GPIO_PIN_0
 #define SEG_B 			GPIO_PIN_1
-#define SEG_C 			GPIO_PIN_2
-#define SEG_D 			GPIO_PIN_3
-#define SEG_E 			GPIO_PIN_4
+#define SEG_C 			GPIO_PIN_12
+#define SEG_D 			GPIO_PIN_13
+#define SEG_E 			GPIO_PIN_14
 #define SEG_F 			GPIO_PIN_5
 #define SEG_G 			GPIO_PIN_6
 #define SELECT_SEG1 	GPIO_PIN_7

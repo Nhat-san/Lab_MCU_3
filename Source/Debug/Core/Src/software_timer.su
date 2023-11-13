@@ -1,3 +1,4 @@
-../Core/Src/software_timer.c:16:6:setTimer	16	static
-../Core/Src/software_timer.c:22:6:timerRun	16	static
-../Core/Src/software_timer.c:34:6:timerOn	16	static
+../Core/Src/software_timer.c:17:6:setTimer	16	static
+../Core/Src/software_timer.c:23:6:timerRun	16	static
+../Core/Src/software_timer.c:35:6:timerOn	16	static
+../Core/Src/software_timer.c:39:6:initTimer	8	static

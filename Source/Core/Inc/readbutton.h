@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "main.h"
+#include "port.h"
 
 void initButton();
 void read_button();
