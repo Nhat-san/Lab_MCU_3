@@ -7,7 +7,7 @@
 
 #define Overall_Freq 1000 //100Hz
 
-#define TIME_BLINK_LED		500
+#define TIME_BLINK_LED		250
 #define TIME_SCAN_7SEG		1
 #define TIME_TRAFFIC_LIGHT	1000
 #define	TIME_BUTTON			100

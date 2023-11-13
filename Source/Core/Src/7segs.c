@@ -20,10 +20,10 @@ void update7SegBuffer(int val1, int val2) {
 }
 //function to turn off all 7 segments led
 void OffAll_7Seg(void) {
-	HAL_GPIO_WritePin(SEG7_PORT, SELECT_SEG1, 0);
-	HAL_GPIO_WritePin(SEG7_PORT, SELECT_SEG2, 0);
-	HAL_GPIO_WritePin(SEG7_PORT, SELECT_SEG3, 0);
-	HAL_GPIO_WritePin(SEG7_PORT, SELECT_SEG4, 0);
+	HAL_GPIO_WritePin(SEG7_PORT, SELECT_SEG1, 1);
+	HAL_GPIO_WritePin(SEG7_PORT, SELECT_SEG2, 1);
+	HAL_GPIO_WritePin(SEG7_PORT, SELECT_SEG3, 1);
+	HAL_GPIO_WritePin(SEG7_PORT, SELECT_SEG4, 1);
 }
 
 /*Function to display num on 7 segments led

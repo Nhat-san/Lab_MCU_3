@@ -8,7 +8,7 @@
 //num of button
 #define NUM_BUTTON 3
 //pressed button more than 1 sec
-#define LONG_PRESSED 200
+#define LONG_PRESSED_TIME 10000
 //
 #define PRESSED 0
 //
@@ -18,7 +18,7 @@ struct button {
 	uint8_t debounce[4];
 	bool is_pressed;
 	bool is_long_pressed;
-	uint8_t TimePress;
+	uint16_t TimePress;
 } MyButton[NUM_BUTTON];
 
 void initButton() {
@@ -29,7 +29,7 @@ void initButton() {
 		MyButton[i].debounce[3] = RELEASED;
 		MyButton[i].is_pressed = 0;
 		MyButton[i].is_long_pressed = 0;
-		MyButton[i].TimePress = LONG_PRESSED;
+		MyButton[i].TimePress = LONG_PRESSED_TIME;
 	}
 }
 
@@ -61,7 +61,7 @@ void read_button() {
 					MyButton[i].is_long_pressed = 1;
 				}
 			} else {
-				MyButton[i].TimePress = LONG_PRESSED;
+				MyButton[i].TimePress = LONG_PRESSED_TIME;
 				MyButton[i].is_pressed = 0;
 				MyButton[i].is_long_pressed = 0;
 			}

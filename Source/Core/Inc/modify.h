@@ -8,6 +8,7 @@
 #ifndef INC_MODIFY_H_
 #define INC_MODIFY_H_
 
+#include "stdbool.h"
 #include "software_timer.h"
 #include "readbutton.h"
 #include "7segs.h"
