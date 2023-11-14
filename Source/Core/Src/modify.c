@@ -7,7 +7,7 @@
 #include "modify.h"
 
 /*
- * State machine mode
+ * MAIN STATE
  */
 enum {
 	NORMAL,
@@ -25,10 +25,17 @@ enum {
 	GREEN_OVERTIME
 } TrafficState = NORMAL;
 
+/*
+ * State for sure that button is pressed
+ * The recent state of button
+ */
 enum {
 	PRESSED, RELEASE
 } buttonState[3];
 
+/*
+ * State for
+ */
 enum {
 	NOTCHANGING, CHANGING
 } is_changing[3];
@@ -46,7 +53,6 @@ uint8_t AmberTimeBuffer = AMBERTIME;
 uint8_t GreenTime = REDTIME - AMBERTIME;
 uint8_t GreenTimeBuffer = REDTIME - AMBERTIME;
 bool is_blink_led = 0;
-bool button_press = 0;
 
 void TrafficLightFSM();
 void button0();
@@ -65,28 +71,28 @@ void ControlTraffic() {
 			if (i < 0) {
 				i = 3;
 			}
-			setTimer(1, 1);
 		}
+		setTimer(1, 1);
 	}
 	switch (TrafficState) {
 	case NORMAL:
-		if (TrafficState == NORMAL && RedTime != AmberTime + GreenTime) {
+		/* check if time changed is valid */
+		if (RedTime != AmberTime + GreenTime) {
 			traffic_light_state = INVALID;
-			OffAll_7Seg();
 		} else {
 			TrafficLightFSM();
 		}
 		//button 0
 		button0();
 		break;
-		//Modify red
+		/* Modify red begin-------------------------------- */
 	case RED_MODIFY:
 		if (is_changing[0] == NOTCHANGING) {
 			RedTimeBuffer = RedTime;
 		}
 		// display the value and mode
 		update7SegBuffer(RedTimeBuffer, 2);
-		//led 2Hz
+		//Blink single Led 2Hz
 		led2Hz();
 		//button 0
 		button0();
@@ -116,20 +122,20 @@ void ControlTraffic() {
 		//buton1
 		button1();
 		break;
-	case RED_SET:
+	case RED_SET:/* Set the value for Red*/
 		RedTime = RedTimeBuffer;
 		is_changing[0] = NOTCHANGING;
 		TrafficState = RED_MODIFY;
 		break;
 
-		//Modify Amber
+	/* Modify Amber begin-------------------------------- */
 	case AMBER_MODIFY:
 		if (is_changing[1] == NOTCHANGING) {
 			AmberTimeBuffer = AmberTime;
 		}
 		// display the value and mode
 		update7SegBuffer(AmberTimeBuffer, 3);
-		//led 2Hz
+		//Blink single Led 2Hz
 		led2Hz();
 		//button 0
 		button0();
@@ -167,14 +173,14 @@ void ControlTraffic() {
 		TrafficState = AMBER_MODIFY;
 		break;
 
-		//Modify green
+	/* Modify Green begin-------------------------------- */
 	case GREEN_MODIFY:
 		if (is_changing[2] == NOTCHANGING) {
 			GreenTimeBuffer = GreenTime;
 		}
 		// display the value and mode
 		update7SegBuffer(GreenTimeBuffer, 4);
-		//led 2Hz
+		//Blink single Led 2Hz
 		led2Hz();
 		//button 0
 		button0();
@@ -184,6 +190,7 @@ void ControlTraffic() {
 		button2();
 		break;
 	case GREEN_INCREASE_1:
+
 		GreenTimeBuffer++;
 		if (GreenTimeBuffer > 99) {
 			GreenTimeBuffer = 0;
@@ -214,6 +221,9 @@ void ControlTraffic() {
 	}
 }
 
+/*
+ *	FSM to control the Traffic display
+ */
 void TrafficLightFSM() {
 	if (!timerOn(2)) {
 		setTimer(2, 1000);
@@ -232,23 +242,32 @@ void TrafficLightFSM() {
 				timeWE = GreenTime;
 				timeNS = RedTime;
 			}
+			break;
 		case GREENWE_REDNS:
 			if (timeWE <= 0) {
 				traffic_light_state = AMBERWE_REDNS;
 				timeWE = AmberTime;
 			}
+			break;
 		case AMBERWE_REDNS:
 			if (timeWE <= 0) {
 				traffic_light_state = REDWE_GREENNS;
 				timeWE = RedTime;
 				timeNS = GreenTime;
 			}
+			break;
+		case INVALID:
+			traffic_light_state = INVALID;
+			break;
 		default:
 			break;
 		}
 	}
 }
 
+/*
+ * Funtion for change state modify when pressed first button (button0)
+ */
 void button0() {
 	switch (buttonState[0]) {
 	case RELEASE:
@@ -289,6 +308,9 @@ void button0() {
 	return;
 }
 
+/*
+ * Funtion for increase value when pressed second button (button1)
+ */
 void button1() {
 	switch (buttonState[1]) {
 	case RELEASE:
@@ -321,6 +343,9 @@ void button1() {
 	}
 }
 
+/*
+ * Funtion for set value when pressed third button (button2)
+ */
 void button2() {
 	switch (buttonState[2]) {
 	case RELEASE:
@@ -354,6 +379,9 @@ void button2() {
 	return;
 }
 
+/*
+ * Funtion for Blink led in modify mode
+ */
 void led2Hz() {
 	if (is_blink_led) {
 		switch (TrafficState) {

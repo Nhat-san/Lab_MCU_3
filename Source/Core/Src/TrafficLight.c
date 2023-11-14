@@ -31,12 +31,12 @@ void traffic_light(){
 			HAL_GPIO_WritePin(TL_PORT, WE_AMBER, 0);
 			break;
 		case INVALID:
-			HAL_GPIO_WritePin(TL_PORT, WE_RED, 0);
-			HAL_GPIO_WritePin(TL_PORT, WE_AMBER, 0);
-			HAL_GPIO_WritePin(TL_PORT, WE_GREEN, 0);
-			HAL_GPIO_WritePin(TL_PORT, NS_RED, 0);
-			HAL_GPIO_WritePin(TL_PORT, NS_AMBER, 0);
-			HAL_GPIO_WritePin(TL_PORT, NS_GREEN, 0);
+			HAL_GPIO_WritePin(TL_PORT, WE_RED, 1);
+			HAL_GPIO_WritePin(TL_PORT, WE_AMBER, 1);
+			HAL_GPIO_WritePin(TL_PORT, WE_GREEN, 1);
+			HAL_GPIO_WritePin(TL_PORT, NS_RED, 1);
+			HAL_GPIO_WritePin(TL_PORT, NS_AMBER, 1);
+			HAL_GPIO_WritePin(TL_PORT, NS_GREEN, 1);
 		default:
 			break;
 	}

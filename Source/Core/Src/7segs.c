@@ -29,7 +29,6 @@ void OffAll_7Seg(void) {
 /*Function to display num on 7 segments led
  *Because pullup so 0 is on, 1 is off
  */
-
 void display7SEG(uint8_t num) {
 	if (num == 1) {
 		HAL_GPIO_WritePin(SEG7_PORT, SEG_A, 0);
