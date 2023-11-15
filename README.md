@@ -16,19 +16,19 @@
 - [Feedback](#feedback)
 
 
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Introduction
 This is project to create a traffic system can control with 3 buttons.
 
 ## Hardware
-
 - STM32_bluepill
-<p align="center">
+  <p align="center">
   <img src = "https://revspace.nl/images/thumb/d/d0/HTB1PemDJpXXXXXHXpXXq6xXFXXXM.jpg/525px-HTB1PemDJpXXXXXHXpXXq6xXFXXXM.jpg" width=300>
-</p>
+  </p>
 - Mini st-link
-- 7-segments led common anode.
+- 7-segments led common anode
 - LED red, amber, green
 
 ## Software
