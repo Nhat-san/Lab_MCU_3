@@ -1,4 +1,9 @@
-<h1 align="center"> HO CHI MINH UNIVERSITY OF TECHNOLOGY </h1> <br>
+<a href="https://hcmut.edu.vn/en">
+  <h1 align="center"> HO CHI MINH UNIVERSITY OF TECHNOLOGY </h1>
+</a>
+<a href="https://cse.hcmut.edu.vn/">
+  <h2 align="center"> FACULTY OF COMPUTER SCIENCE AND ENGINEERING </h2>
+</a>
 <p align="center">
   <a href="https://hcmut.edu.vn/en">
     <img alt="HCMUT" title="HCMUT" src="https://e-learning.hcmut.edu.vn/pluginfile.php/1/core_admin/logocompact/300x300/1685588876/logoBK.png" width="200">
