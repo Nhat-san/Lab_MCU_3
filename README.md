@@ -49,4 +49,4 @@ This is project to create a traffic system can control with 3 buttons.
 
 ## Feedback
 
-Feel free to send us feedback on [MyYoutube](https://www.youtube.com/watch?v=TJeQ9K8IfjY). Feature requests are always welcome.
+Feel free to send me feedback on [MyYoutube](https://www.youtube.com/watch?v=TJeQ9K8IfjY). Feature requests are always welcome.
