@@ -38,6 +38,8 @@ This is project to create a traffic system can control with 3 buttons.
   </p>
 - 7-segments led common anode
 - LED red, amber, green
+- Button
+- Bus wire
 
 ## Software
 
