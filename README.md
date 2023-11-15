@@ -33,6 +33,9 @@ This is project to create a traffic system can control with 3 buttons.
   <img src = "https://revspace.nl/images/thumb/d/d0/HTB1PemDJpXXXXXHXpXXq6xXFXXXM.jpg/525px-HTB1PemDJpXXXXXHXpXXq6xXFXXXM.jpg" width=300>
   </p>
 - Mini st-link
+    <p align="center">
+  <img src = "https://th.bing.com/th/id/R.88bef7492e86f3e24a900d5ffb52ebd5?rik=CJJ9Bo9uV29x0g&pid=ImgRaw&r=0" width=300>
+  </p>
 - 7-segments led common anode
 - LED red, amber, green
 
