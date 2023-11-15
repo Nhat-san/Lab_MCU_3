@@ -45,6 +45,7 @@ This is project to create a traffic system can control with 3 buttons.
 
 - [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html).
 - [STM32CubeProgrammer](https://www.st.com/en/development-tools/stm32-programmers.html)
+- Language: C
 
 ## Feedback
 
