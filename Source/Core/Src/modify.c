@@ -1,9 +1,10 @@
 /*
  * modify.c
  *
- *  Created on: Nov 13, 2023
+ *  Created on: Nov 3, 2023
  *      Author: huaho
  */
+/* Includes ------------------------------------------------------------------*/
 #include "modify.h"
 
 /*
@@ -26,23 +27,24 @@ enum {
 } TrafficState = NORMAL;
 
 /*
- * State for sure that button is pressed
- * The recent state of button
+ * The current state of button
  */
 enum {
-	PRESSED, RELEASE
+	PRESSED, RELEASE, LONGPRESSED
 } buttonState[3];
 
 /*
- * State for
+ * State for assign again time to timebuffer when you in modify mode
  */
 enum {
 	NOTCHANGING, CHANGING
 } is_changing[3];
 
+/* Define---------------------------------------------------------------------*/
 #define REDTIME 5
 #define AMBERTIME 2
 
+/* Variable-------------------------------------------------------------------*/
 int i = 3;
 uint8_t timeWE = REDTIME;
 uint8_t timeNS = AMBERTIME;
@@ -60,7 +62,9 @@ void button1();
 void button2();
 void led2Hz();
 
+/*Function for main state machine---------------------------------------------*/
 void ControlTraffic() {
+	/*Scan 7segs led for every TIME_BLINK_LED time----------------------------*/
 	if (!timerOn(1)) {
 		if (TrafficState == NORMAL && RedTime != AmberTime + GreenTime) {
 			traffic_light_state = INVALID;
@@ -72,8 +76,9 @@ void ControlTraffic() {
 				i = 3;
 			}
 		}
-		setTimer(1, 1);
+		setTimer(1, TIME_SCAN_7SEG);
 	}
+	/*main state machine*/
 	switch (TrafficState) {
 	case NORMAL:
 		/* check if time changed is valid */
@@ -85,7 +90,7 @@ void ControlTraffic() {
 		//button 0
 		button0();
 		break;
-		/* Modify red begin-------------------------------- */
+	/* Modify red begin--------------------------------*/
 	case RED_MODIFY:
 		if (is_changing[0] == NOTCHANGING) {
 			RedTimeBuffer = RedTime;
@@ -119,6 +124,7 @@ void ControlTraffic() {
 			}
 			setTimer(4, 500);
 		}
+		is_changing[0] = CHANGING;
 		//buton1
 		button1();
 		break;
@@ -127,8 +133,9 @@ void ControlTraffic() {
 		is_changing[0] = NOTCHANGING;
 		TrafficState = RED_MODIFY;
 		break;
+	/* Modify red end----------------------------------*/
 
-	/* Modify Amber begin-------------------------------- */
+	/* Modify Amber begin------------------------------*/
 	case AMBER_MODIFY:
 		if (is_changing[1] == NOTCHANGING) {
 			AmberTimeBuffer = AmberTime;
@@ -162,18 +169,18 @@ void ControlTraffic() {
 			}
 			setTimer(4, 500);
 		}
+		is_changing[1] = CHANGING;
 		//buton1
 		button1();
 		break;
-	case AMBER_SET:
-
+	case AMBER_SET:/* Set the value for Amber*/
 		AmberTime = AmberTimeBuffer;
-
 		is_changing[1] = NOTCHANGING;
 		TrafficState = AMBER_MODIFY;
 		break;
+	/* Modify Amber end--------------------------------*/
 
-	/* Modify Green begin-------------------------------- */
+	/* Modify Green begin------------------------------*/
 	case GREEN_MODIFY:
 		if (is_changing[2] == NOTCHANGING) {
 			GreenTimeBuffer = GreenTime;
@@ -190,7 +197,6 @@ void ControlTraffic() {
 		button2();
 		break;
 	case GREEN_INCREASE_1:
-
 		GreenTimeBuffer++;
 		if (GreenTimeBuffer > 99) {
 			GreenTimeBuffer = 0;
@@ -200,7 +206,7 @@ void ControlTraffic() {
 		break;
 	case GREEN_OVERTIME:
 		// display the value and mode
-		update7SegBuffer(GreenTimeBuffer, 2);
+		update7SegBuffer(GreenTimeBuffer, 4);
 		if (!timerOn(4)) {
 			GreenTimeBuffer++;
 			if (GreenTimeBuffer > 99) {
@@ -208,21 +214,24 @@ void ControlTraffic() {
 			}
 			setTimer(4, 500);
 		}
+		is_changing[2] = CHANGING;
 		//buton1
 		button1();
 		break;
-	case GREEN_SET:
+	case GREEN_SET:/* Set the value for Green*/
 		GreenTime = GreenTimeBuffer;
 		is_changing[2] = NOTCHANGING;
 		TrafficState = GREEN_MODIFY;
 		break;
+	/* Modify Green end--------------------------------*/
 	default:
 		break;
 	}
 }
 
 /*
- *	FSM to control the Traffic display
+ *	FSM to control the Traffic display.
+ *	WE is West East, NS is North South
  */
 void TrafficLightFSM() {
 	if (!timerOn(2)) {
@@ -336,6 +345,43 @@ void button1() {
 	case PRESSED:
 		if (!is_button_pressed(1)) {
 			buttonState[1] = RELEASE;
+		} else if (is_button_long_pressed(1)) {
+			buttonState[1] = LONGPRESSED;
+		}
+		break;
+	case LONGPRESSED:
+		switch (TrafficState) {
+		case RED_MODIFY:
+			TrafficState = RED_OVERTIME;
+			break;
+		case AMBER_MODIFY:
+			TrafficState = AMBER_OVERTIME;
+			break;
+		case GREEN_MODIFY:
+			TrafficState = GREEN_OVERTIME;
+			break;
+		default:
+			break;
+		}
+		/*Release button*/
+		if (!is_button_pressed(1)) {
+			switch (TrafficState) {
+				case RED_OVERTIME:
+					TrafficState = RED_MODIFY;
+					is_changing[0] = NOTCHANGING;
+					break;
+				case AMBER_OVERTIME:
+					TrafficState = AMBER_MODIFY;
+					is_changing[1] = NOTCHANGING;
+					break;
+				case GREEN_OVERTIME:
+					TrafficState = GREEN_MODIFY;
+					is_changing[2] = NOTCHANGING;
+					break;
+				default:
+					break;
+			}
+			buttonState[1] = RELEASE;
 		}
 		break;
 	default:
@@ -384,6 +430,10 @@ void button2() {
  */
 void led2Hz() {
 	if (is_blink_led) {
+		/*Blink PC13 Led*/
+		HAL_GPIO_TogglePin(BLINK_LED_PORT, BLINK_LED);
+
+		/*Toggle traffic light*/
 		switch (TrafficState) {
 		case RED_MODIFY:
 			HAL_GPIO_WritePin(TL_PORT, WE_RED, 0);
@@ -417,6 +467,9 @@ void led2Hz() {
 			is_blink_led = 0;
 		}
 	} else {
+		/*BLink PC13 led*/
+		HAL_GPIO_TogglePin(BLINK_LED_PORT, BLINK_LED);
+		/*turn off traffic light*/
 		HAL_GPIO_WritePin(TL_PORT, WE_RED, 1);
 		HAL_GPIO_WritePin(TL_PORT, NS_RED, 1);
 		HAL_GPIO_WritePin(TL_PORT, WE_AMBER, 1);

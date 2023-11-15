@@ -1,5 +1,5 @@
 /*
- * trafficlight.h
+ * Trafficlight.h
  *
  *  Created on: Nov 12, 2023
  *      Author: huaho

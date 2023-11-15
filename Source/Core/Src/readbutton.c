@@ -1,14 +1,14 @@
 /*
  * readbutton.c
  *
- *  Created on: Nov 12, 2023
+ *  Created on: Nov 1, 2023
  *      Author: huaho
  */
 #include "readbutton.h"
 //num of button
 #define NUM_BUTTON 3
 //pressed button more than 1 sec
-#define LONG_PRESSED_TIME 1500
+#define LONG_PRESSED_TIME 150
 //
 #define PRESSED 0
 //
@@ -68,12 +68,12 @@ void read_button() {
 }
 
 uint8_t is_button_pressed(uint8_t i) {
-	if (i > NUM_BUTTON)
+	if (i >= NUM_BUTTON)
 		return 0xff;
 	return MyButton[i].is_pressed;
 }
 uint8_t is_button_long_pressed(uint8_t i) {
-	if (i > NUM_BUTTON)
+	if (i >= NUM_BUTTON)
 		return 0xff;
 	return MyButton[i].is_long_pressed;
 }

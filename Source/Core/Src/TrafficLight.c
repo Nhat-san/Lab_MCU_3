@@ -1,11 +1,11 @@
 /*
  * TrafficLight.c
  *
- *  Created on: Nov 12, 2023
+ *  Created on: Oct 30, 2023
  *      Author: huaho
  */
 #include "TrafficLight.h"
-
+/*State machine off display traffic light*/
 enum st traffic_light_state = REDWE_GREENNS;
 
 void traffic_light(){

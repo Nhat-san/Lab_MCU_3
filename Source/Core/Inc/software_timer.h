@@ -7,11 +7,11 @@
 
 #define Overall_Freq 1000 //100Hz
 
-#define TIME_BLINK_LED		250
-#define TIME_SCAN_7SEG		1
-#define TIME_TRAFFIC_LIGHT	1000
-#define	TIME_BUTTON			50
-#define	TIME_OVER			500
+#define TIME_BLINK_LED		250	/*time of blink led*/
+#define TIME_SCAN_7SEG		1	/*time of scan 7-segments leds*/
+#define TIME_TRAFFIC_LIGHT	1000/*time of count down traffic light value*/
+#define	TIME_BUTTON			10	/*time of read button*/
+#define	TIME_OVER			500	/*time to increase value when long_pressed second button*/
 
 void setTimer(uint8_t, unsigned int);
 void timerRun();
