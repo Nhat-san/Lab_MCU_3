@@ -1,7 +1,7 @@
 <h1 align="center"> HO CHI MINH UNIVERSITY OF TECHNOLOGY </h1> <br>
 <p align="center">
   <a href="https://hcmut.edu.vn/en">
-    <img alt="HCMUT" title="HCMUT" src="https://e-learning.hcmut.edu.vn/pluginfile.php/1/core_admin/logocompact/300x300/1685588876/logoBK.png" width="450">
+    <img alt="HCMUT" title="HCMUT" src="https://e-learning.hcmut.edu.vn/pluginfile.php/1/core_admin/logocompact/300x300/1685588876/logoBK.png" width="200">
   </a>
 </p>
 
